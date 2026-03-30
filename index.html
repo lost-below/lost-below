@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lost Below | LB - Streetwear</title>
+    <link href="[fonts.googleapis.com](https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap)" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --black: #0a0a0a;
+            --white: #ffffff;
+            --gray: #1a1a1a;
+            --gray-light: #2a2a2a;
+            --accent: #e5e5e5;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--black);
+            color: var(--white);
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.9);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2rem;
+            letter-spacing: 4px;
+            cursor: pointer;
+        }
+
+        .logo span {
+            opacity: 0.5;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.6;
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--white);
+            color: var(--black);
+            font-size: 0.7rem;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 10;
+        }
+
+        .hero-logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(8rem, 20vw, 15rem);
+            letter-spacing: 20px;
+            line-height: 0.9;
+            animation: fadeUp 1s ease-out;
+        }
+
+        .hero-tagline {
+            font-size: 1rem;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            opacity: 0.6;
+            margin-top: 2rem;
+            animation: fadeUp 1s ease-out 0.3s both;
+        }
+
+        .hero-cta {
+            margin-top: 3rem;
+            animation: fadeUp 1s ease-out 0.6s both;
+        }
+
+        .btn {
+            padding: 1rem 3rem;
+            font-size: 0.85rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            border: 1px solid var(--white);
+            background: transparent;
+            color: var(--white);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: var(--white);
+            color: var(--black);
+        }
+
+        .btn-filled {
+            background: var(--white);
+            color: var(--black);
+        }
+
+        .btn-filled:hover {
+            background: transparent;
+            color: var(--white);
+        }
+
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Marquee */
+        .marquee {
+            background: var(--white);
+            color: var(--black);
+            padding: 1rem 0;
+            overflow: hidden;
+        }
+
+        .marquee-content {
+            display: flex;
+            animation: marquee 20s linear infinite;
+        }
+
+        .marquee-item {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 4px;
+            white-space: nowrap;
+            padding: 0 3rem;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Products Section */
+        .section {
+            padding: 6rem 4rem;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3rem;
+            letter-spacing: 4px;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: var(--gray);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .product-image {
+            aspect-ratio: 3/4;
+            background: var(--gray-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image .lb-logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 6rem;
+            opacity: 0.1;
+            letter-spacing: 10px;
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: var(--white);
+            color: var(--black);
+            padding: 0.3rem 0.8rem;
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .quick-add {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--white);
+            color: var(--black);
+            padding: 1rem;
+            text-align: center;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover .quick-add {
+            transform: translateY(0);
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-name {
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-price {
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        /* About Section */
+        .about {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-visual {
+            aspect-ratio: 1;
+            background: var(--gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .about-visual .big-logo {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 12rem;
+            opacity: 0.05;
+            position: absolute;
+        }
+
+        .about-visual .main-text {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 4rem;
+            letter-spacing: 10px;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+        }
+
+        .about-content h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3rem;
+            letter-spacing: 4px;
+            margin-bottom: 2rem;
+        }
+
+        .about-content p {
+            font-size: 1rem;
+            line-height: 1.8;
+            opacity: 0.8;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Lookbook */
+        .lookbook-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0.5rem;
+        }
+
+        .lookbook-item {
+            aspect-ratio: 1;
+            background: var(--gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: opacity 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .lookbook-item:hover {
+            opacity: 0.8;
+        }
+
+        .lookbook-item span {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3rem;
+            opacity: 0.1;
+        }
+
+        .lookbook-item:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+        .lookbook-item:nth-child(1) span { font-size: 6rem; }
+
+        /* Newsletter */
+        .newsletter {
+            background: var(--gray);
+            padding: 6rem 4rem;
+            text-align: center;
+        }
+
+        .newsletter h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 3rem;
+            letter-spacing: 4px;
+            margin-bottom: 1rem;
+        }
+
+        .newsletter p {
+            opacity: 0.6;
+            margin-bottom: 2rem;
+        }
+
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+            gap: 1rem;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            background: var(--black);
+            border: 1px solid var(--gray-light);
+            color: var(--white);
+            font-size: 0.9rem;
+        }
+
+        .newsletter-form input::placeholder {
+            color: rgba(255,255,255,0.4);
+        }
+
+        /* Footer */
+        footer {
+            padding: 4rem;
+            border-top: 1px solid var(--gray-light);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .footer-brand .logo {
+            margin-bottom: 1rem;
+        }
+
+        .footer-brand p {
+            opacity: 0.6;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .footer-column h4 {
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            opacity: 0.5;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-column a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .footer-column a:hover {
+            opacity: 1;
+        }
+
+        .footer-bottom {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--gray-light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            opacity: 0.5;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .social-links a {
+            color: var(--white);
+            text-decoration: none;
+        }
+
+        /* Cart Sidebar */
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 400px;
+            height: 100vh;
+            background: var(--gray);
+            z-index: 2000;
+            transition: right 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cart-sidebar.open {
+            right: 0;
+        }
+
+        .cart-header {
+            padding: 2rem;
+            border-bottom: 1px solid var(--gray-light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-header h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.5rem;
+            letter-spacing: 3px;
+        }
+
+        .close-cart {
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1rem;
+        }
+
+        .cart-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem;
+            border-bottom: 1px solid var(--gray-light);
+        }
+
+        .cart-item-image {
+            width: 80px;
+            height: 100px;
+            background: var(--gray-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cart-item-image span {
+            font-family: 'Bebas Neue', sans-serif;
+            opacity: 0.2;
+        }
+
+        .cart-item-details {
+            flex: 1;
+        }
+
+        .cart-item-name {
+            font-weight: 500;
+            margin-bottom: 0.3rem;
+        }
+
+        .cart-item-variant {
+            font-size: 0.8rem;
+            opacity: 0.6;
+            margin-bottom: 0.5rem;
+        }
+
+        .cart-item-price {
+            font-size: 0.9rem;
+        }
+
+        .cart-item-qty {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .qty-btn {
+            width: 24px;
+            height: 24px;
+            background: var(--gray-light);
+            border: none;
+            color: var(--white);
+            cursor: pointer;
+        }
+
+        .cart-footer {
+            padding: 2rem;
+            border-top: 1px solid var(--gray-light);
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1500;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+
+        .cart-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Size Selector */
+        .size-selector {
+            display: flex;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .size-btn {
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--gray-light);
+            background: transparent;
+            color: var(--white);
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.3s;
+        }
+
+        .size-btn:hover, .size-btn.active {
+            background: var(--white);
+            color: var(--black);
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--white);
+            color: var(--black);
+            padding: 1rem 2rem;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            z-index: 3000;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            nav {
+                padding: 1rem 2rem;
+            }
+            .nav-links {
+                display: none;
+            }
+            .section {
+                padding: 4rem 2rem;
+            }
+            .about {
+                grid-template-columns: 1fr;
+            }
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+                gap: 2rem;
+            }
+            .lookbook-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-logo {
+                letter-spacing: 10px;
+            }
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            .newsletter-form {
+                flex-direction: column;
+            }
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+            .cart-sidebar {
+                width: 100%;
+                right: -100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">LB <span>/ LOST BELOW</span></div>
+        <ul class="nav-links">
+            <li><a href="#shop">Shop</a></li>
+            <li><a href="#lookbook">Lookbook</a></li>
+            <li><a href="#about">À propos</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="nav-icons">
+            <div class="cart-icon" onclick="toggleCart()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+                    <line x1="3" y1="6" x2="21" y2="6"/>
+                    <path d="M16 10a4 4 0 01-8 0"/>
+                </svg>
+                <span class="cart-count" id="cartCount">0</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <h1 class="hero-logo">LB</h1>
+            <p class="hero-tagline">Lost Below — Find yourself</p>
+            <div class="hero-cta">
+                <button class="btn" onclick="document.getElementById('shop').scrollIntoView({behavior: 'smooth'})">
+                    Découvrir la collection
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Marquee -->
+    <div class="marquee">
+        <div class="marquee-content">
+            <span class="marquee-item">NEW COLLECTION 2024</span>
+            <span class="marquee-item">•</span>
+            <span class="marquee-item">LOST BELOW</span>
+            <span class="marquee-item">•</span>
+            <span class="marquee-item">STREETWEAR ESSENTIALS</span>
+            <span class="marquee-item">•</span>
+            <span class="marquee-item">FREE SHIPPING OVER 100€</span>
+            <span class="marquee-item">•</span>
+            <span class="marquee-item">NEW COLLECTION 2024</span>
+            <span class="marquee-item">•</span>
+            <span class="marquee-item">LOST BELOW</span>
+            <span class="marquee-item">•</span>
+            <span class="marquee-item">STREETWEAR ESSENTIALS</span>
+            <span class="marquee-item">•</span>
+            <span class="marquee-item">FREE SHIPPING OVER 100€</span>
+            <span class="marquee-item">•</span>
+        </div>
+    </div>
+
+    <!-- Products Section -->
+    <section class="section" id="shop">
+        <div class="section-header">
+            <h2 class="section-title">Collection</h2>
+            <button class="btn">Voir tout</button>
+        </div>
+        <div class="products-grid" id="productsGrid">
+            <!-- Products will be injected by JS -->
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section" id="about">
+        <div class="about">
+            <div class="about-visual">
+                <span class="big-logo">LB</span>
+                <span class="main-text">LOST BELOW</span>
+            </div>
+            <div class="about-content">
+                <h2>L'histoire de Lost Below</h2>
+                <p>
+                    Lost Below est née d'une idée simple : créer des vêtements pour ceux qui cherchent 
+                    leur propre voie. Notre marque représente le voyage intérieur, la découverte de soi 
+                    à travers les profondeurs de notre être.
+                </p>
+                <p>
+                    Chaque pièce LB est conçue avec attention, en utilisant des matériaux premium 
+                    et des coupes modernes qui allient confort et style. Nous croyons que le streetwear 
+                    est plus qu'une mode — c'est une expression de qui nous sommes.
+                </p>
+                <button class="btn">Notre manifeste</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lookbook -->
+    <section class="section" id="lookbook">
+        <div class="section-header">
+            <h2 class="section-title">Lookbook</h2>
+        </div>
+        <div class="lookbook-grid">
+            <div class="lookbook-item"><span>LB</span></div>
+            <div class="lookbook-item"><span>LB</span></div>
+            <div class="lookbook-item"><span>LB</span></div>
+            <div class="lookbook-item"><span>LB</span></div>
+            <div class="lookbook-item"><span>LB</span></div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter" id="contact">
+        <h2>Rejoins le mouvement</h2>
+        <p>Inscris-toi pour recevoir les dernières nouveautés et offres exclusives.</p>
+        <form class="newsletter-form" onsubmit="subscribeNewsletter(event)">
+            <input type="email" placeholder="Ton adresse email" required>
+            <button type="submit" class="btn btn-filled">S'inscrire</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <div class="logo">LB</div>
+                <p>Lost Below — Streetwear pour ceux qui osent explorer les profondeurs de leur authenticité.</p>
+            </div>
+            <div class="footer-column">
+                <h4>Shop</h4>
+                <ul>
+                    <li><a href="#">T-shirts</a></li>
+                    <li><a href="#">Hoodies</a></li>
+                    <li><a href="#">Accessoires</a></li>
+                    <li><a href="#">Nouveautés</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Info</h4>
+                <ul>
+                    <li><a href="#">À propos</a></li>
+                    <li><a href="#">Contact</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Livraison</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Légal</h4>
+                <ul>
+                    <li><a href="#">CGV</a></li>
+                    <li><a href="#">Confidentialité</a></li>
+                    <li><a href="#">Retours</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>© 2024 Lost Below. Tous droits réservés.</span>
+            <div class="social-links">
+                <a href="#">Instagram</a>
+                <a href="#">TikTok</a>
+                <a href="#">Twitter</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Panier</h3>
+            <button class="close-cart" onclick="toggleCart()">×</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <!-- Cart items will be injected by JS -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total</span>
+                <span id="cartTotal">0€</span>
+            </div>
+            <button class="btn btn-filled" style="width: 100%;">Commander</button>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast">Ajouté au panier</div>
+
+    <script>
+        // Product Data
+        const products = [
+            { id: 1, name: 'LB Essential Tee — Black', price: 45, badge: 'Bestseller', sizes: ['S', 'M', 'L', 'XL'] },
+            { id: 2, name: 'LB Essential Tee — White', price: 45, badge: null, sizes: ['S', 'M', 'L', 'XL'] },
+            { id: 3, name: 'LB Oversized Logo Tee', price: 55, badge: 'New', sizes: ['S', 'M', 'L', 'XL'] },
+            { id: 4, name: 'LB Minimalist Tee — Gray', price: 45, badge: null, sizes: ['S', 'M', 'L', 'XL'] },
+            { id: 5, name: 'LB Vintage Washed Tee', price: 60, badge: 'Limited', sizes: ['M', 'L', 'XL'] },
+            { id: 6, name: 'LB Box Logo Tee', price: 50, badge: null, sizes: ['S', 'M', 'L', 'XL'] },
+        ];
+
+        // Cart State
+        let cart = [];
+
+        // Render Products
+        function renderProducts() {
+            const grid = document.getElementById('productsGrid');
+            grid.innerHTML = products.map(product => `
+                <div class="product-card" data-id="${product.id}">
+                    <div class="product-image">
+                        ${product.badge ? `<span class="product-badge">${product.badge}</span>` : ''}
+                        <span class="lb-logo">LB</span>
+                        <div class="quick-add" onclick="event.stopPropagation(); showSizeSelector(${product.id})">
+                            Ajouter au panier
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">${product.name}</h3>
+                        <p class="product-price">${product.price}€</p>
+                        <div class="size-selector" id="sizes-${product.id}" style="display: none;">
+                            ${product.sizes.map(size => `
+                                <button class="size-btn" onclick="event.stopPropagation(); addToCart(${product.id}, '${size}')">${size}</button>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Show Size Selector
+        function showSizeSelector(productId) {
+            const selector = document.getElementById(`sizes-${productId}`);
+            const allSelectors = document.querySelectorAll('.size-selector');
+            allSelectors.forEach(s => s.style.display = 'none');
+            selector.style.display = 'flex';
+        }
+
+        // Add to Cart
+        function addToCart(productId, size) {
+            const product = products.find(p => p.id === productId);
+            const existingItem = cart.find(item => item.id === productId && item.size === size);
+            
+            if (existingItem) {
+                existingItem.qty++;
+            } else {
+                cart.push({ ...product, size, qty: 1 });
+            }
+            
+            updateCart();
+            showToast();
+            
+            // Hide size selector
+            document.getElementById(`sizes-${productId}`).style.display = 'none';
+        }
+
+        // Update Cart
+        function updateCart() {
+            const count = cart.reduce((sum, item) => sum + item.qty, 0);
+            document.getElementById('cartCount').textContent = count;
+            
+            const total = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            document.getElementById('cartTotal').textContent = `${total}€`;
+            
+            const cartItems = document.getElementById('cartItems');
+            
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<p style="text-align: center; padding: 2rem; opacity: 0.5;">Ton panier est vide</p>';
+                return;
+            }
+            
+            cartItems.innerHTML = cart.map((item, index) => `
+                <div class="cart-item">
+                    <div class="cart-item-image"><span>LB</span></div>
+                    <div class="cart-item-details">
+                        <div class="cart-item-name">${item.name}</div>
+                        <div class="cart-item-variant">Taille: ${item.size}</div>
+                        <div class="cart-item-price">${item.price}€</div>
+                        <div class="cart-item-qty">
+                            <button class="qty-btn" onclick="updateQty(${index}, -1)">−</button>
+                            <span>${item.qty}</span>
+                            <button class="qty-btn" onclick="updateQty(${index}, 1)">+</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Update Quantity
+        function updateQty(index, change) {
+            cart[index].qty += change;
+            if (cart[index].qty <= 0) {
+                cart.splice(index, 1);
+            }
+            updateCart();
+        }
+
+        // Toggle Cart
+        function toggleCart() {
+            document.getElementById('cartSidebar').classList.toggle('open');
+            document.getElementById('cartOverlay').classList.toggle('open');
+        }
+
+        // Show Toast
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2000);
+        }
+
+        // Newsletter
+        function subscribeNewsletter(e) {
+            e.preventDefault();
+            const toast = document.getElementById('toast');
+            toast.textContent = 'Merci pour ton inscription !';
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+                toast.textContent = 'Ajouté au panier';
+            }, 2000);
+            e.target.reset();
+        }
+
+        // Initialize
+        renderProducts();
+        updateCart();
+    </script>
+
+</body>
+</html>
